@@ -4,8 +4,9 @@ import { envVars } from "../../config/env";
 import { AppError } from "../errors/app-error";
 import { cookieUtils } from "../utils/cookie";
 import { jwtUtils } from "../utils/jwt";
-import { Role, UserStatus } from "@prisma/client";
+
 import { prisma } from "../../database/prisma";
+import { Role, UserStatus } from "../../generated/prisma";
 
 export const authorize = (...authRoles: Role[]) =>
 

@@ -1,8 +1,8 @@
-import { Role } from "@prisma/client";
+
 
 export interface IRequestUser {
   id: string;
-  role: Role | string;
+  role: string;
   email: string;
 }
 

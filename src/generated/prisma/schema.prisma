@@ -1,3 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
+
+enum InputType {
+  SNIPPET
+  SINGLE_FILE
+  ZIP
+}
+
+enum AuditStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+// ========== AUTH MODELS ==========
+
 model User {
   id                 String     @id @default(cuid())
   name               String
@@ -11,8 +53,10 @@ model User {
   image              String?
   createdAt          DateTime   @default(now())
   updatedAt          DateTime   @updatedAt
-  sessions           Session[]
-  accounts           Account[]
+
+  sessions      Session[]
+  accounts      Account[]
+  auditProjects AuditProject[]
 
   @@unique([email])
   @@map("user")
@@ -65,23 +109,58 @@ model Verification {
   @@map("verification")
 }
 
-enum Role {
-  SUPER_ADMIN
-  ADMIN
-  USER
+// ========== AUDIT MODELS ==========
+
+model AuditProject {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Project-এর নাম (user দেবে অথবা file নাম থেকে auto set)
+  name String
+
+  // কোন method ব্যবহার হয়েছে
+  inputType InputType
+
+  // Method 1 — Code snippet paste
+  snippet String?
+
+  // Method 2 — Single file upload (.ts, .js, .html etc.)
+  fileUrl  String? // Cloudinary URL
+  fileName String? // original file নাম (e.g. "index.ts")
+
+  // Method 3 — ZIP upload (পুরো project)
+  zipUrl      String? // Cloudinary URL
+  zipFileName String? // original ZIP নাম (e.g. "my-project.zip")
+
+  // Audit এর current status
+  status AuditStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  results AuditResult[]
+
+  @@index([userId])
+  @@map("audit_project")
 }
 
-enum UserStatus {
-  ACTIVE
-  BLOCKED
-  DELETED
-}
+model AuditResult {
+  id        String       @id @default(cuid())
+  projectId String
+  project   AuditProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  fileName  String
+  issues    Json
 
-generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
-}
+  // React Flow-এর জন্য dependency map
+  // structure: { nodes: [{ id, label }], edges: [{ source, target }] }
+  dependencies Json
 
-datasource db {
-  provider = "postgresql"
+  // Overall risk level
+  riskLevel RiskLevel @default(LOW)
+
+  createdAt DateTime @default(now())
+
+  @@index([projectId])
+  @@map("audit_result")
 }

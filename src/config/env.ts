@@ -21,7 +21,7 @@ interface EnvConfig {
     SMTP_PORT: string;
     SMTP_FROM: string;
   };
-    NODE_ENV: string;
+  NODE_ENV: string;
   PORT: string;
   BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN: string;
   BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE: string;
@@ -31,7 +31,12 @@ interface EnvConfig {
   REFRESH_TOKEN_EXPIRES_IN: string;
   SUPER_ADMIN_EMAIL: string;
   SUPER_ADMIN_PASSWORD: string;
-  
+  CLOUDINARY: {
+    CLOUD_NAME: string;
+    API_KEY: string;
+    API_SECRET: string;
+  };
+  GEMINI_API_KEY: string;
 }
 
 const loadEnvVars = (): EnvConfig => {
@@ -49,7 +54,7 @@ const loadEnvVars = (): EnvConfig => {
     "EMAIL_SENDER_SMTP_HOST",
     "EMAIL_SENDER_SMTP_PORT",
     "EMAIL_SENDER_SMTP_FROM",
-        "NODE_ENV",
+    "NODE_ENV",
     "PORT",
     "BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN",
     "BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE",
@@ -59,16 +64,18 @@ const loadEnvVars = (): EnvConfig => {
     "REFRESH_TOKEN_EXPIRES_IN",
     "SUPER_ADMIN_EMAIL",
     "SUPER_ADMIN_PASSWORD",
-    
+    "CLOUDINARY_CLOUD_NAME",
+    "CLOUDINARY_API_KEY",
+    "CLOUDINARY_API_SECRET",
+    "GEMINI_API_KEY",
   ];
 
   requiredEnvVars.forEach((varName) => {
     if (!process.env[varName]) {
-            throw new AppError(
+      throw new AppError(
         status.INTERNAL_SERVER_ERROR,
         `Environment variable ${varName} is required but not set in .env file.`,
       );
-      
     }
   });
 
@@ -88,19 +95,22 @@ const loadEnvVars = (): EnvConfig => {
       SMTP_PORT: process.env.EMAIL_SENDER_SMTP_PORT as string,
       SMTP_FROM: process.env.EMAIL_SENDER_SMTP_FROM as string,
     },
-        NODE_ENV: process.env.NODE_ENV as string,
+    NODE_ENV: process.env.NODE_ENV as string,
     PORT: process.env.PORT as string,
-        BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN: process.env
-      .BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN as string,
-    BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE: process.env
-      .BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE as string,
+    BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN: process.env.BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN as string,
+    BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE: process.env.BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE as string,
     ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET as string,
     ACCESS_TOKEN_EXPIRES_IN: process.env.ACCESS_TOKEN_EXPIRES_IN as string,
     REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET as string,
     REFRESH_TOKEN_EXPIRES_IN: process.env.REFRESH_TOKEN_EXPIRES_IN as string,
     SUPER_ADMIN_EMAIL: process.env.SUPER_ADMIN_EMAIL as string,
     SUPER_ADMIN_PASSWORD: process.env.SUPER_ADMIN_PASSWORD as string,
-    
+    CLOUDINARY: {
+      CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME as string,
+      API_KEY: process.env.CLOUDINARY_API_KEY as string,
+      API_SECRET: process.env.CLOUDINARY_API_SECRET as string,
+    },
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY as string,
   };
 };
 

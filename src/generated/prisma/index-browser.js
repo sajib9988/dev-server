@@ -171,9 +171,38 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AuditProjectScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  inputType: 'inputType',
+  snippet: 'snippet',
+  fileUrl: 'fileUrl',
+  fileName: 'fileName',
+  zipUrl: 'zipUrl',
+  zipFileName: 'zipFileName',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AuditResultScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  fileName: 'fileName',
+  issues: 'issues',
+  dependencies: 'dependencies',
+  riskLevel: 'riskLevel',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -184,6 +213,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.Role = exports.$Enums.Role = {
   SUPER_ADMIN: 'SUPER_ADMIN',
@@ -197,11 +232,32 @@ exports.UserStatus = exports.$Enums.UserStatus = {
   DELETED: 'DELETED'
 };
 
+exports.InputType = exports.$Enums.InputType = {
+  SNIPPET: 'SNIPPET',
+  SINGLE_FILE: 'SINGLE_FILE',
+  ZIP: 'ZIP'
+};
+
+exports.AuditStatus = exports.$Enums.AuditStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+};
+
+exports.RiskLevel = exports.$Enums.RiskLevel = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  AuditProject: 'AuditProject',
+  AuditResult: 'AuditResult'
 };
 
 /**

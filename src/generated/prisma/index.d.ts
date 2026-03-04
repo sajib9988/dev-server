@@ -33,6 +33,16 @@ export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
  * 
  */
 export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
+/**
+ * Model AuditProject
+ * 
+ */
+export type AuditProject = $Result.DefaultSelection<Prisma.$AuditProjectPayload>
+/**
+ * Model AuditResult
+ * 
+ */
+export type AuditResult = $Result.DefaultSelection<Prisma.$AuditResultPayload>
 
 /**
  * Enums
@@ -55,6 +65,34 @@ export const UserStatus: {
 
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
 
+
+export const InputType: {
+  SNIPPET: 'SNIPPET',
+  SINGLE_FILE: 'SINGLE_FILE',
+  ZIP: 'ZIP'
+};
+
+export type InputType = (typeof InputType)[keyof typeof InputType]
+
+
+export const AuditStatus: {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+};
+
+export type AuditStatus = (typeof AuditStatus)[keyof typeof AuditStatus]
+
+
+export const RiskLevel: {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH'
+};
+
+export type RiskLevel = (typeof RiskLevel)[keyof typeof RiskLevel]
+
 }
 
 export type Role = $Enums.Role
@@ -64,6 +102,18 @@ export const Role: typeof $Enums.Role
 export type UserStatus = $Enums.UserStatus
 
 export const UserStatus: typeof $Enums.UserStatus
+
+export type InputType = $Enums.InputType
+
+export const InputType: typeof $Enums.InputType
+
+export type AuditStatus = $Enums.AuditStatus
+
+export const AuditStatus: typeof $Enums.AuditStatus
+
+export type RiskLevel = $Enums.RiskLevel
+
+export const RiskLevel: typeof $Enums.RiskLevel
 
 /**
  * ##  Prisma Client ʲˢ
@@ -225,6 +275,26 @@ export class PrismaClient<
     * ```
     */
   get verification(): Prisma.VerificationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.auditProject`: Exposes CRUD operations for the **AuditProject** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AuditProjects
+    * const auditProjects = await prisma.auditProject.findMany()
+    * ```
+    */
+  get auditProject(): Prisma.AuditProjectDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.auditResult`: Exposes CRUD operations for the **AuditResult** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AuditResults
+    * const auditResults = await prisma.auditResult.findMany()
+    * ```
+    */
+  get auditResult(): Prisma.AuditResultDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -662,7 +732,9 @@ export namespace Prisma {
     User: 'User',
     Session: 'Session',
     Account: 'Account',
-    Verification: 'Verification'
+    Verification: 'Verification',
+    AuditProject: 'AuditProject',
+    AuditResult: 'AuditResult'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -678,7 +750,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification"
+      modelProps: "user" | "session" | "account" | "verification" | "auditProject" | "auditResult"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -978,6 +1050,154 @@ export namespace Prisma {
           }
         }
       }
+      AuditProject: {
+        payload: Prisma.$AuditProjectPayload<ExtArgs>
+        fields: Prisma.AuditProjectFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AuditProjectFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditProjectPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AuditProjectFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditProjectPayload>
+          }
+          findFirst: {
+            args: Prisma.AuditProjectFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditProjectPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AuditProjectFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditProjectPayload>
+          }
+          findMany: {
+            args: Prisma.AuditProjectFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditProjectPayload>[]
+          }
+          create: {
+            args: Prisma.AuditProjectCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditProjectPayload>
+          }
+          createMany: {
+            args: Prisma.AuditProjectCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AuditProjectCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditProjectPayload>[]
+          }
+          delete: {
+            args: Prisma.AuditProjectDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditProjectPayload>
+          }
+          update: {
+            args: Prisma.AuditProjectUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditProjectPayload>
+          }
+          deleteMany: {
+            args: Prisma.AuditProjectDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AuditProjectUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AuditProjectUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditProjectPayload>[]
+          }
+          upsert: {
+            args: Prisma.AuditProjectUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditProjectPayload>
+          }
+          aggregate: {
+            args: Prisma.AuditProjectAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAuditProject>
+          }
+          groupBy: {
+            args: Prisma.AuditProjectGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AuditProjectGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AuditProjectCountArgs<ExtArgs>
+            result: $Utils.Optional<AuditProjectCountAggregateOutputType> | number
+          }
+        }
+      }
+      AuditResult: {
+        payload: Prisma.$AuditResultPayload<ExtArgs>
+        fields: Prisma.AuditResultFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AuditResultFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditResultPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AuditResultFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditResultPayload>
+          }
+          findFirst: {
+            args: Prisma.AuditResultFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditResultPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AuditResultFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditResultPayload>
+          }
+          findMany: {
+            args: Prisma.AuditResultFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditResultPayload>[]
+          }
+          create: {
+            args: Prisma.AuditResultCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditResultPayload>
+          }
+          createMany: {
+            args: Prisma.AuditResultCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AuditResultCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditResultPayload>[]
+          }
+          delete: {
+            args: Prisma.AuditResultDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditResultPayload>
+          }
+          update: {
+            args: Prisma.AuditResultUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditResultPayload>
+          }
+          deleteMany: {
+            args: Prisma.AuditResultDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AuditResultUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AuditResultUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditResultPayload>[]
+          }
+          upsert: {
+            args: Prisma.AuditResultUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuditResultPayload>
+          }
+          aggregate: {
+            args: Prisma.AuditResultAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAuditResult>
+          }
+          groupBy: {
+            args: Prisma.AuditResultGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AuditResultGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AuditResultCountArgs<ExtArgs>
+            result: $Utils.Optional<AuditResultCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1090,6 +1310,8 @@ export namespace Prisma {
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
+    auditProject?: AuditProjectOmit
+    auditResult?: AuditResultOmit
   }
 
   /* Types for Logging */
@@ -1172,11 +1394,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     sessions: number
     accounts: number
+    auditProjects: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+    auditProjects?: boolean | UserCountOutputTypeCountAuditProjectsArgs
   }
 
   // Custom InputTypes
@@ -1202,6 +1426,44 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AccountWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAuditProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AuditProjectWhereInput
+  }
+
+
+  /**
+   * Count Type AuditProjectCountOutputType
+   */
+
+  export type AuditProjectCountOutputType = {
+    results: number
+  }
+
+  export type AuditProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    results?: boolean | AuditProjectCountOutputTypeCountResultsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AuditProjectCountOutputType without action
+   */
+  export type AuditProjectCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProjectCountOutputType
+     */
+    select?: AuditProjectCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AuditProjectCountOutputType without action
+   */
+  export type AuditProjectCountOutputTypeCountResultsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AuditResultWhereInput
   }
 
 
@@ -1431,6 +1693,7 @@ export namespace Prisma {
     updatedAt?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    auditProjects?: boolean | User$auditProjectsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1483,6 +1746,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    auditProjects?: boolean | User$auditProjectsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1493,6 +1757,7 @@ export namespace Prisma {
     objects: {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
+      auditProjects: Prisma.$AuditProjectPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1903,6 +2168,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    auditProjects<T extends User$auditProjectsArgs<ExtArgs> = {}>(args?: Subset<T, User$auditProjectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2377,6 +2643,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+  }
+
+  /**
+   * User.auditProjects
+   */
+  export type User$auditProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectInclude<ExtArgs> | null
+    where?: AuditProjectWhereInput
+    orderBy?: AuditProjectOrderByWithRelationInput | AuditProjectOrderByWithRelationInput[]
+    cursor?: AuditProjectWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AuditProjectScalarFieldEnum | AuditProjectScalarFieldEnum[]
   }
 
   /**
@@ -5666,6 +5956,2261 @@ export namespace Prisma {
 
 
   /**
+   * Model AuditProject
+   */
+
+  export type AggregateAuditProject = {
+    _count: AuditProjectCountAggregateOutputType | null
+    _min: AuditProjectMinAggregateOutputType | null
+    _max: AuditProjectMaxAggregateOutputType | null
+  }
+
+  export type AuditProjectMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    inputType: $Enums.InputType | null
+    snippet: string | null
+    fileUrl: string | null
+    fileName: string | null
+    zipUrl: string | null
+    zipFileName: string | null
+    status: $Enums.AuditStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AuditProjectMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    name: string | null
+    inputType: $Enums.InputType | null
+    snippet: string | null
+    fileUrl: string | null
+    fileName: string | null
+    zipUrl: string | null
+    zipFileName: string | null
+    status: $Enums.AuditStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AuditProjectCountAggregateOutputType = {
+    id: number
+    userId: number
+    name: number
+    inputType: number
+    snippet: number
+    fileUrl: number
+    fileName: number
+    zipUrl: number
+    zipFileName: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AuditProjectMinAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    inputType?: true
+    snippet?: true
+    fileUrl?: true
+    fileName?: true
+    zipUrl?: true
+    zipFileName?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AuditProjectMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    inputType?: true
+    snippet?: true
+    fileUrl?: true
+    fileName?: true
+    zipUrl?: true
+    zipFileName?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AuditProjectCountAggregateInputType = {
+    id?: true
+    userId?: true
+    name?: true
+    inputType?: true
+    snippet?: true
+    fileUrl?: true
+    fileName?: true
+    zipUrl?: true
+    zipFileName?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AuditProjectAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AuditProject to aggregate.
+     */
+    where?: AuditProjectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AuditProjects to fetch.
+     */
+    orderBy?: AuditProjectOrderByWithRelationInput | AuditProjectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AuditProjectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AuditProjects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AuditProjects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AuditProjects
+    **/
+    _count?: true | AuditProjectCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AuditProjectMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AuditProjectMaxAggregateInputType
+  }
+
+  export type GetAuditProjectAggregateType<T extends AuditProjectAggregateArgs> = {
+        [P in keyof T & keyof AggregateAuditProject]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAuditProject[P]>
+      : GetScalarType<T[P], AggregateAuditProject[P]>
+  }
+
+
+
+
+  export type AuditProjectGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AuditProjectWhereInput
+    orderBy?: AuditProjectOrderByWithAggregationInput | AuditProjectOrderByWithAggregationInput[]
+    by: AuditProjectScalarFieldEnum[] | AuditProjectScalarFieldEnum
+    having?: AuditProjectScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AuditProjectCountAggregateInputType | true
+    _min?: AuditProjectMinAggregateInputType
+    _max?: AuditProjectMaxAggregateInputType
+  }
+
+  export type AuditProjectGroupByOutputType = {
+    id: string
+    userId: string
+    name: string
+    inputType: $Enums.InputType
+    snippet: string | null
+    fileUrl: string | null
+    fileName: string | null
+    zipUrl: string | null
+    zipFileName: string | null
+    status: $Enums.AuditStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: AuditProjectCountAggregateOutputType | null
+    _min: AuditProjectMinAggregateOutputType | null
+    _max: AuditProjectMaxAggregateOutputType | null
+  }
+
+  type GetAuditProjectGroupByPayload<T extends AuditProjectGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AuditProjectGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AuditProjectGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AuditProjectGroupByOutputType[P]>
+            : GetScalarType<T[P], AuditProjectGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AuditProjectSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    inputType?: boolean
+    snippet?: boolean
+    fileUrl?: boolean
+    fileName?: boolean
+    zipUrl?: boolean
+    zipFileName?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    results?: boolean | AuditProject$resultsArgs<ExtArgs>
+    _count?: boolean | AuditProjectCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["auditProject"]>
+
+  export type AuditProjectSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    inputType?: boolean
+    snippet?: boolean
+    fileUrl?: boolean
+    fileName?: boolean
+    zipUrl?: boolean
+    zipFileName?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["auditProject"]>
+
+  export type AuditProjectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    inputType?: boolean
+    snippet?: boolean
+    fileUrl?: boolean
+    fileName?: boolean
+    zipUrl?: boolean
+    zipFileName?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["auditProject"]>
+
+  export type AuditProjectSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    name?: boolean
+    inputType?: boolean
+    snippet?: boolean
+    fileUrl?: boolean
+    fileName?: boolean
+    zipUrl?: boolean
+    zipFileName?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AuditProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "inputType" | "snippet" | "fileUrl" | "fileName" | "zipUrl" | "zipFileName" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["auditProject"]>
+  export type AuditProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    results?: boolean | AuditProject$resultsArgs<ExtArgs>
+    _count?: boolean | AuditProjectCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AuditProjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AuditProjectIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $AuditProjectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AuditProject"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      results: Prisma.$AuditResultPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      name: string
+      inputType: $Enums.InputType
+      snippet: string | null
+      fileUrl: string | null
+      fileName: string | null
+      zipUrl: string | null
+      zipFileName: string | null
+      status: $Enums.AuditStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["auditProject"]>
+    composites: {}
+  }
+
+  type AuditProjectGetPayload<S extends boolean | null | undefined | AuditProjectDefaultArgs> = $Result.GetResult<Prisma.$AuditProjectPayload, S>
+
+  type AuditProjectCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AuditProjectFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AuditProjectCountAggregateInputType | true
+    }
+
+  export interface AuditProjectDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AuditProject'], meta: { name: 'AuditProject' } }
+    /**
+     * Find zero or one AuditProject that matches the filter.
+     * @param {AuditProjectFindUniqueArgs} args - Arguments to find a AuditProject
+     * @example
+     * // Get one AuditProject
+     * const auditProject = await prisma.auditProject.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AuditProjectFindUniqueArgs>(args: SelectSubset<T, AuditProjectFindUniqueArgs<ExtArgs>>): Prisma__AuditProjectClient<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AuditProject that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AuditProjectFindUniqueOrThrowArgs} args - Arguments to find a AuditProject
+     * @example
+     * // Get one AuditProject
+     * const auditProject = await prisma.auditProject.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AuditProjectFindUniqueOrThrowArgs>(args: SelectSubset<T, AuditProjectFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AuditProjectClient<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AuditProject that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditProjectFindFirstArgs} args - Arguments to find a AuditProject
+     * @example
+     * // Get one AuditProject
+     * const auditProject = await prisma.auditProject.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AuditProjectFindFirstArgs>(args?: SelectSubset<T, AuditProjectFindFirstArgs<ExtArgs>>): Prisma__AuditProjectClient<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AuditProject that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditProjectFindFirstOrThrowArgs} args - Arguments to find a AuditProject
+     * @example
+     * // Get one AuditProject
+     * const auditProject = await prisma.auditProject.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AuditProjectFindFirstOrThrowArgs>(args?: SelectSubset<T, AuditProjectFindFirstOrThrowArgs<ExtArgs>>): Prisma__AuditProjectClient<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AuditProjects that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditProjectFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AuditProjects
+     * const auditProjects = await prisma.auditProject.findMany()
+     * 
+     * // Get first 10 AuditProjects
+     * const auditProjects = await prisma.auditProject.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const auditProjectWithIdOnly = await prisma.auditProject.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AuditProjectFindManyArgs>(args?: SelectSubset<T, AuditProjectFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AuditProject.
+     * @param {AuditProjectCreateArgs} args - Arguments to create a AuditProject.
+     * @example
+     * // Create one AuditProject
+     * const AuditProject = await prisma.auditProject.create({
+     *   data: {
+     *     // ... data to create a AuditProject
+     *   }
+     * })
+     * 
+     */
+    create<T extends AuditProjectCreateArgs>(args: SelectSubset<T, AuditProjectCreateArgs<ExtArgs>>): Prisma__AuditProjectClient<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AuditProjects.
+     * @param {AuditProjectCreateManyArgs} args - Arguments to create many AuditProjects.
+     * @example
+     * // Create many AuditProjects
+     * const auditProject = await prisma.auditProject.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AuditProjectCreateManyArgs>(args?: SelectSubset<T, AuditProjectCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AuditProjects and returns the data saved in the database.
+     * @param {AuditProjectCreateManyAndReturnArgs} args - Arguments to create many AuditProjects.
+     * @example
+     * // Create many AuditProjects
+     * const auditProject = await prisma.auditProject.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AuditProjects and only return the `id`
+     * const auditProjectWithIdOnly = await prisma.auditProject.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AuditProjectCreateManyAndReturnArgs>(args?: SelectSubset<T, AuditProjectCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AuditProject.
+     * @param {AuditProjectDeleteArgs} args - Arguments to delete one AuditProject.
+     * @example
+     * // Delete one AuditProject
+     * const AuditProject = await prisma.auditProject.delete({
+     *   where: {
+     *     // ... filter to delete one AuditProject
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AuditProjectDeleteArgs>(args: SelectSubset<T, AuditProjectDeleteArgs<ExtArgs>>): Prisma__AuditProjectClient<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AuditProject.
+     * @param {AuditProjectUpdateArgs} args - Arguments to update one AuditProject.
+     * @example
+     * // Update one AuditProject
+     * const auditProject = await prisma.auditProject.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AuditProjectUpdateArgs>(args: SelectSubset<T, AuditProjectUpdateArgs<ExtArgs>>): Prisma__AuditProjectClient<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AuditProjects.
+     * @param {AuditProjectDeleteManyArgs} args - Arguments to filter AuditProjects to delete.
+     * @example
+     * // Delete a few AuditProjects
+     * const { count } = await prisma.auditProject.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AuditProjectDeleteManyArgs>(args?: SelectSubset<T, AuditProjectDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AuditProjects.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditProjectUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AuditProjects
+     * const auditProject = await prisma.auditProject.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AuditProjectUpdateManyArgs>(args: SelectSubset<T, AuditProjectUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AuditProjects and returns the data updated in the database.
+     * @param {AuditProjectUpdateManyAndReturnArgs} args - Arguments to update many AuditProjects.
+     * @example
+     * // Update many AuditProjects
+     * const auditProject = await prisma.auditProject.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AuditProjects and only return the `id`
+     * const auditProjectWithIdOnly = await prisma.auditProject.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AuditProjectUpdateManyAndReturnArgs>(args: SelectSubset<T, AuditProjectUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AuditProject.
+     * @param {AuditProjectUpsertArgs} args - Arguments to update or create a AuditProject.
+     * @example
+     * // Update or create a AuditProject
+     * const auditProject = await prisma.auditProject.upsert({
+     *   create: {
+     *     // ... data to create a AuditProject
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AuditProject we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AuditProjectUpsertArgs>(args: SelectSubset<T, AuditProjectUpsertArgs<ExtArgs>>): Prisma__AuditProjectClient<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AuditProjects.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditProjectCountArgs} args - Arguments to filter AuditProjects to count.
+     * @example
+     * // Count the number of AuditProjects
+     * const count = await prisma.auditProject.count({
+     *   where: {
+     *     // ... the filter for the AuditProjects we want to count
+     *   }
+     * })
+    **/
+    count<T extends AuditProjectCountArgs>(
+      args?: Subset<T, AuditProjectCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AuditProjectCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AuditProject.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditProjectAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AuditProjectAggregateArgs>(args: Subset<T, AuditProjectAggregateArgs>): Prisma.PrismaPromise<GetAuditProjectAggregateType<T>>
+
+    /**
+     * Group by AuditProject.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditProjectGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AuditProjectGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AuditProjectGroupByArgs['orderBy'] }
+        : { orderBy?: AuditProjectGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AuditProjectGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAuditProjectGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AuditProject model
+   */
+  readonly fields: AuditProjectFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AuditProject.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AuditProjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    results<T extends AuditProject$resultsArgs<ExtArgs> = {}>(args?: Subset<T, AuditProject$resultsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AuditProject model
+   */
+  interface AuditProjectFieldRefs {
+    readonly id: FieldRef<"AuditProject", 'String'>
+    readonly userId: FieldRef<"AuditProject", 'String'>
+    readonly name: FieldRef<"AuditProject", 'String'>
+    readonly inputType: FieldRef<"AuditProject", 'InputType'>
+    readonly snippet: FieldRef<"AuditProject", 'String'>
+    readonly fileUrl: FieldRef<"AuditProject", 'String'>
+    readonly fileName: FieldRef<"AuditProject", 'String'>
+    readonly zipUrl: FieldRef<"AuditProject", 'String'>
+    readonly zipFileName: FieldRef<"AuditProject", 'String'>
+    readonly status: FieldRef<"AuditProject", 'AuditStatus'>
+    readonly createdAt: FieldRef<"AuditProject", 'DateTime'>
+    readonly updatedAt: FieldRef<"AuditProject", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AuditProject findUnique
+   */
+  export type AuditProjectFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectInclude<ExtArgs> | null
+    /**
+     * Filter, which AuditProject to fetch.
+     */
+    where: AuditProjectWhereUniqueInput
+  }
+
+  /**
+   * AuditProject findUniqueOrThrow
+   */
+  export type AuditProjectFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectInclude<ExtArgs> | null
+    /**
+     * Filter, which AuditProject to fetch.
+     */
+    where: AuditProjectWhereUniqueInput
+  }
+
+  /**
+   * AuditProject findFirst
+   */
+  export type AuditProjectFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectInclude<ExtArgs> | null
+    /**
+     * Filter, which AuditProject to fetch.
+     */
+    where?: AuditProjectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AuditProjects to fetch.
+     */
+    orderBy?: AuditProjectOrderByWithRelationInput | AuditProjectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AuditProjects.
+     */
+    cursor?: AuditProjectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AuditProjects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AuditProjects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AuditProjects.
+     */
+    distinct?: AuditProjectScalarFieldEnum | AuditProjectScalarFieldEnum[]
+  }
+
+  /**
+   * AuditProject findFirstOrThrow
+   */
+  export type AuditProjectFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectInclude<ExtArgs> | null
+    /**
+     * Filter, which AuditProject to fetch.
+     */
+    where?: AuditProjectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AuditProjects to fetch.
+     */
+    orderBy?: AuditProjectOrderByWithRelationInput | AuditProjectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AuditProjects.
+     */
+    cursor?: AuditProjectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AuditProjects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AuditProjects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AuditProjects.
+     */
+    distinct?: AuditProjectScalarFieldEnum | AuditProjectScalarFieldEnum[]
+  }
+
+  /**
+   * AuditProject findMany
+   */
+  export type AuditProjectFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectInclude<ExtArgs> | null
+    /**
+     * Filter, which AuditProjects to fetch.
+     */
+    where?: AuditProjectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AuditProjects to fetch.
+     */
+    orderBy?: AuditProjectOrderByWithRelationInput | AuditProjectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AuditProjects.
+     */
+    cursor?: AuditProjectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AuditProjects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AuditProjects.
+     */
+    skip?: number
+    distinct?: AuditProjectScalarFieldEnum | AuditProjectScalarFieldEnum[]
+  }
+
+  /**
+   * AuditProject create
+   */
+  export type AuditProjectCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AuditProject.
+     */
+    data: XOR<AuditProjectCreateInput, AuditProjectUncheckedCreateInput>
+  }
+
+  /**
+   * AuditProject createMany
+   */
+  export type AuditProjectCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AuditProjects.
+     */
+    data: AuditProjectCreateManyInput | AuditProjectCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AuditProject createManyAndReturn
+   */
+  export type AuditProjectCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * The data used to create many AuditProjects.
+     */
+    data: AuditProjectCreateManyInput | AuditProjectCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AuditProject update
+   */
+  export type AuditProjectUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AuditProject.
+     */
+    data: XOR<AuditProjectUpdateInput, AuditProjectUncheckedUpdateInput>
+    /**
+     * Choose, which AuditProject to update.
+     */
+    where: AuditProjectWhereUniqueInput
+  }
+
+  /**
+   * AuditProject updateMany
+   */
+  export type AuditProjectUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AuditProjects.
+     */
+    data: XOR<AuditProjectUpdateManyMutationInput, AuditProjectUncheckedUpdateManyInput>
+    /**
+     * Filter which AuditProjects to update
+     */
+    where?: AuditProjectWhereInput
+    /**
+     * Limit how many AuditProjects to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AuditProject updateManyAndReturn
+   */
+  export type AuditProjectUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * The data used to update AuditProjects.
+     */
+    data: XOR<AuditProjectUpdateManyMutationInput, AuditProjectUncheckedUpdateManyInput>
+    /**
+     * Filter which AuditProjects to update
+     */
+    where?: AuditProjectWhereInput
+    /**
+     * Limit how many AuditProjects to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AuditProject upsert
+   */
+  export type AuditProjectUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AuditProject to update in case it exists.
+     */
+    where: AuditProjectWhereUniqueInput
+    /**
+     * In case the AuditProject found by the `where` argument doesn't exist, create a new AuditProject with this data.
+     */
+    create: XOR<AuditProjectCreateInput, AuditProjectUncheckedCreateInput>
+    /**
+     * In case the AuditProject was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AuditProjectUpdateInput, AuditProjectUncheckedUpdateInput>
+  }
+
+  /**
+   * AuditProject delete
+   */
+  export type AuditProjectDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectInclude<ExtArgs> | null
+    /**
+     * Filter which AuditProject to delete.
+     */
+    where: AuditProjectWhereUniqueInput
+  }
+
+  /**
+   * AuditProject deleteMany
+   */
+  export type AuditProjectDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AuditProjects to delete
+     */
+    where?: AuditProjectWhereInput
+    /**
+     * Limit how many AuditProjects to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AuditProject.results
+   */
+  export type AuditProject$resultsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultInclude<ExtArgs> | null
+    where?: AuditResultWhereInput
+    orderBy?: AuditResultOrderByWithRelationInput | AuditResultOrderByWithRelationInput[]
+    cursor?: AuditResultWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AuditResultScalarFieldEnum | AuditResultScalarFieldEnum[]
+  }
+
+  /**
+   * AuditProject without action
+   */
+  export type AuditProjectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditProject
+     */
+    select?: AuditProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditProject
+     */
+    omit?: AuditProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditProjectInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AuditResult
+   */
+
+  export type AggregateAuditResult = {
+    _count: AuditResultCountAggregateOutputType | null
+    _min: AuditResultMinAggregateOutputType | null
+    _max: AuditResultMaxAggregateOutputType | null
+  }
+
+  export type AuditResultMinAggregateOutputType = {
+    id: string | null
+    projectId: string | null
+    fileName: string | null
+    riskLevel: $Enums.RiskLevel | null
+    createdAt: Date | null
+  }
+
+  export type AuditResultMaxAggregateOutputType = {
+    id: string | null
+    projectId: string | null
+    fileName: string | null
+    riskLevel: $Enums.RiskLevel | null
+    createdAt: Date | null
+  }
+
+  export type AuditResultCountAggregateOutputType = {
+    id: number
+    projectId: number
+    fileName: number
+    issues: number
+    dependencies: number
+    riskLevel: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AuditResultMinAggregateInputType = {
+    id?: true
+    projectId?: true
+    fileName?: true
+    riskLevel?: true
+    createdAt?: true
+  }
+
+  export type AuditResultMaxAggregateInputType = {
+    id?: true
+    projectId?: true
+    fileName?: true
+    riskLevel?: true
+    createdAt?: true
+  }
+
+  export type AuditResultCountAggregateInputType = {
+    id?: true
+    projectId?: true
+    fileName?: true
+    issues?: true
+    dependencies?: true
+    riskLevel?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AuditResultAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AuditResult to aggregate.
+     */
+    where?: AuditResultWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AuditResults to fetch.
+     */
+    orderBy?: AuditResultOrderByWithRelationInput | AuditResultOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AuditResultWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AuditResults from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AuditResults.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AuditResults
+    **/
+    _count?: true | AuditResultCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AuditResultMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AuditResultMaxAggregateInputType
+  }
+
+  export type GetAuditResultAggregateType<T extends AuditResultAggregateArgs> = {
+        [P in keyof T & keyof AggregateAuditResult]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAuditResult[P]>
+      : GetScalarType<T[P], AggregateAuditResult[P]>
+  }
+
+
+
+
+  export type AuditResultGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AuditResultWhereInput
+    orderBy?: AuditResultOrderByWithAggregationInput | AuditResultOrderByWithAggregationInput[]
+    by: AuditResultScalarFieldEnum[] | AuditResultScalarFieldEnum
+    having?: AuditResultScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AuditResultCountAggregateInputType | true
+    _min?: AuditResultMinAggregateInputType
+    _max?: AuditResultMaxAggregateInputType
+  }
+
+  export type AuditResultGroupByOutputType = {
+    id: string
+    projectId: string
+    fileName: string
+    issues: JsonValue
+    dependencies: JsonValue
+    riskLevel: $Enums.RiskLevel
+    createdAt: Date
+    _count: AuditResultCountAggregateOutputType | null
+    _min: AuditResultMinAggregateOutputType | null
+    _max: AuditResultMaxAggregateOutputType | null
+  }
+
+  type GetAuditResultGroupByPayload<T extends AuditResultGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AuditResultGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AuditResultGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AuditResultGroupByOutputType[P]>
+            : GetScalarType<T[P], AuditResultGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AuditResultSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projectId?: boolean
+    fileName?: boolean
+    issues?: boolean
+    dependencies?: boolean
+    riskLevel?: boolean
+    createdAt?: boolean
+    project?: boolean | AuditProjectDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["auditResult"]>
+
+  export type AuditResultSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projectId?: boolean
+    fileName?: boolean
+    issues?: boolean
+    dependencies?: boolean
+    riskLevel?: boolean
+    createdAt?: boolean
+    project?: boolean | AuditProjectDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["auditResult"]>
+
+  export type AuditResultSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projectId?: boolean
+    fileName?: boolean
+    issues?: boolean
+    dependencies?: boolean
+    riskLevel?: boolean
+    createdAt?: boolean
+    project?: boolean | AuditProjectDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["auditResult"]>
+
+  export type AuditResultSelectScalar = {
+    id?: boolean
+    projectId?: boolean
+    fileName?: boolean
+    issues?: boolean
+    dependencies?: boolean
+    riskLevel?: boolean
+    createdAt?: boolean
+  }
+
+  export type AuditResultOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "fileName" | "issues" | "dependencies" | "riskLevel" | "createdAt", ExtArgs["result"]["auditResult"]>
+  export type AuditResultInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | AuditProjectDefaultArgs<ExtArgs>
+  }
+  export type AuditResultIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | AuditProjectDefaultArgs<ExtArgs>
+  }
+  export type AuditResultIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | AuditProjectDefaultArgs<ExtArgs>
+  }
+
+  export type $AuditResultPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AuditResult"
+    objects: {
+      project: Prisma.$AuditProjectPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      projectId: string
+      fileName: string
+      issues: Prisma.JsonValue
+      dependencies: Prisma.JsonValue
+      riskLevel: $Enums.RiskLevel
+      createdAt: Date
+    }, ExtArgs["result"]["auditResult"]>
+    composites: {}
+  }
+
+  type AuditResultGetPayload<S extends boolean | null | undefined | AuditResultDefaultArgs> = $Result.GetResult<Prisma.$AuditResultPayload, S>
+
+  type AuditResultCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AuditResultFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AuditResultCountAggregateInputType | true
+    }
+
+  export interface AuditResultDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AuditResult'], meta: { name: 'AuditResult' } }
+    /**
+     * Find zero or one AuditResult that matches the filter.
+     * @param {AuditResultFindUniqueArgs} args - Arguments to find a AuditResult
+     * @example
+     * // Get one AuditResult
+     * const auditResult = await prisma.auditResult.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AuditResultFindUniqueArgs>(args: SelectSubset<T, AuditResultFindUniqueArgs<ExtArgs>>): Prisma__AuditResultClient<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AuditResult that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AuditResultFindUniqueOrThrowArgs} args - Arguments to find a AuditResult
+     * @example
+     * // Get one AuditResult
+     * const auditResult = await prisma.auditResult.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AuditResultFindUniqueOrThrowArgs>(args: SelectSubset<T, AuditResultFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AuditResultClient<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AuditResult that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditResultFindFirstArgs} args - Arguments to find a AuditResult
+     * @example
+     * // Get one AuditResult
+     * const auditResult = await prisma.auditResult.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AuditResultFindFirstArgs>(args?: SelectSubset<T, AuditResultFindFirstArgs<ExtArgs>>): Prisma__AuditResultClient<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AuditResult that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditResultFindFirstOrThrowArgs} args - Arguments to find a AuditResult
+     * @example
+     * // Get one AuditResult
+     * const auditResult = await prisma.auditResult.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AuditResultFindFirstOrThrowArgs>(args?: SelectSubset<T, AuditResultFindFirstOrThrowArgs<ExtArgs>>): Prisma__AuditResultClient<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AuditResults that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditResultFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AuditResults
+     * const auditResults = await prisma.auditResult.findMany()
+     * 
+     * // Get first 10 AuditResults
+     * const auditResults = await prisma.auditResult.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const auditResultWithIdOnly = await prisma.auditResult.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AuditResultFindManyArgs>(args?: SelectSubset<T, AuditResultFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AuditResult.
+     * @param {AuditResultCreateArgs} args - Arguments to create a AuditResult.
+     * @example
+     * // Create one AuditResult
+     * const AuditResult = await prisma.auditResult.create({
+     *   data: {
+     *     // ... data to create a AuditResult
+     *   }
+     * })
+     * 
+     */
+    create<T extends AuditResultCreateArgs>(args: SelectSubset<T, AuditResultCreateArgs<ExtArgs>>): Prisma__AuditResultClient<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AuditResults.
+     * @param {AuditResultCreateManyArgs} args - Arguments to create many AuditResults.
+     * @example
+     * // Create many AuditResults
+     * const auditResult = await prisma.auditResult.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AuditResultCreateManyArgs>(args?: SelectSubset<T, AuditResultCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AuditResults and returns the data saved in the database.
+     * @param {AuditResultCreateManyAndReturnArgs} args - Arguments to create many AuditResults.
+     * @example
+     * // Create many AuditResults
+     * const auditResult = await prisma.auditResult.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AuditResults and only return the `id`
+     * const auditResultWithIdOnly = await prisma.auditResult.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AuditResultCreateManyAndReturnArgs>(args?: SelectSubset<T, AuditResultCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AuditResult.
+     * @param {AuditResultDeleteArgs} args - Arguments to delete one AuditResult.
+     * @example
+     * // Delete one AuditResult
+     * const AuditResult = await prisma.auditResult.delete({
+     *   where: {
+     *     // ... filter to delete one AuditResult
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AuditResultDeleteArgs>(args: SelectSubset<T, AuditResultDeleteArgs<ExtArgs>>): Prisma__AuditResultClient<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AuditResult.
+     * @param {AuditResultUpdateArgs} args - Arguments to update one AuditResult.
+     * @example
+     * // Update one AuditResult
+     * const auditResult = await prisma.auditResult.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AuditResultUpdateArgs>(args: SelectSubset<T, AuditResultUpdateArgs<ExtArgs>>): Prisma__AuditResultClient<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AuditResults.
+     * @param {AuditResultDeleteManyArgs} args - Arguments to filter AuditResults to delete.
+     * @example
+     * // Delete a few AuditResults
+     * const { count } = await prisma.auditResult.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AuditResultDeleteManyArgs>(args?: SelectSubset<T, AuditResultDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AuditResults.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditResultUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AuditResults
+     * const auditResult = await prisma.auditResult.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AuditResultUpdateManyArgs>(args: SelectSubset<T, AuditResultUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AuditResults and returns the data updated in the database.
+     * @param {AuditResultUpdateManyAndReturnArgs} args - Arguments to update many AuditResults.
+     * @example
+     * // Update many AuditResults
+     * const auditResult = await prisma.auditResult.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AuditResults and only return the `id`
+     * const auditResultWithIdOnly = await prisma.auditResult.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AuditResultUpdateManyAndReturnArgs>(args: SelectSubset<T, AuditResultUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AuditResult.
+     * @param {AuditResultUpsertArgs} args - Arguments to update or create a AuditResult.
+     * @example
+     * // Update or create a AuditResult
+     * const auditResult = await prisma.auditResult.upsert({
+     *   create: {
+     *     // ... data to create a AuditResult
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AuditResult we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AuditResultUpsertArgs>(args: SelectSubset<T, AuditResultUpsertArgs<ExtArgs>>): Prisma__AuditResultClient<$Result.GetResult<Prisma.$AuditResultPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AuditResults.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditResultCountArgs} args - Arguments to filter AuditResults to count.
+     * @example
+     * // Count the number of AuditResults
+     * const count = await prisma.auditResult.count({
+     *   where: {
+     *     // ... the filter for the AuditResults we want to count
+     *   }
+     * })
+    **/
+    count<T extends AuditResultCountArgs>(
+      args?: Subset<T, AuditResultCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AuditResultCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AuditResult.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditResultAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AuditResultAggregateArgs>(args: Subset<T, AuditResultAggregateArgs>): Prisma.PrismaPromise<GetAuditResultAggregateType<T>>
+
+    /**
+     * Group by AuditResult.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuditResultGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AuditResultGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AuditResultGroupByArgs['orderBy'] }
+        : { orderBy?: AuditResultGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AuditResultGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAuditResultGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AuditResult model
+   */
+  readonly fields: AuditResultFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AuditResult.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AuditResultClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    project<T extends AuditProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AuditProjectDefaultArgs<ExtArgs>>): Prisma__AuditProjectClient<$Result.GetResult<Prisma.$AuditProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AuditResult model
+   */
+  interface AuditResultFieldRefs {
+    readonly id: FieldRef<"AuditResult", 'String'>
+    readonly projectId: FieldRef<"AuditResult", 'String'>
+    readonly fileName: FieldRef<"AuditResult", 'String'>
+    readonly issues: FieldRef<"AuditResult", 'Json'>
+    readonly dependencies: FieldRef<"AuditResult", 'Json'>
+    readonly riskLevel: FieldRef<"AuditResult", 'RiskLevel'>
+    readonly createdAt: FieldRef<"AuditResult", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AuditResult findUnique
+   */
+  export type AuditResultFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultInclude<ExtArgs> | null
+    /**
+     * Filter, which AuditResult to fetch.
+     */
+    where: AuditResultWhereUniqueInput
+  }
+
+  /**
+   * AuditResult findUniqueOrThrow
+   */
+  export type AuditResultFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultInclude<ExtArgs> | null
+    /**
+     * Filter, which AuditResult to fetch.
+     */
+    where: AuditResultWhereUniqueInput
+  }
+
+  /**
+   * AuditResult findFirst
+   */
+  export type AuditResultFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultInclude<ExtArgs> | null
+    /**
+     * Filter, which AuditResult to fetch.
+     */
+    where?: AuditResultWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AuditResults to fetch.
+     */
+    orderBy?: AuditResultOrderByWithRelationInput | AuditResultOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AuditResults.
+     */
+    cursor?: AuditResultWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AuditResults from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AuditResults.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AuditResults.
+     */
+    distinct?: AuditResultScalarFieldEnum | AuditResultScalarFieldEnum[]
+  }
+
+  /**
+   * AuditResult findFirstOrThrow
+   */
+  export type AuditResultFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultInclude<ExtArgs> | null
+    /**
+     * Filter, which AuditResult to fetch.
+     */
+    where?: AuditResultWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AuditResults to fetch.
+     */
+    orderBy?: AuditResultOrderByWithRelationInput | AuditResultOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AuditResults.
+     */
+    cursor?: AuditResultWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AuditResults from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AuditResults.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AuditResults.
+     */
+    distinct?: AuditResultScalarFieldEnum | AuditResultScalarFieldEnum[]
+  }
+
+  /**
+   * AuditResult findMany
+   */
+  export type AuditResultFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultInclude<ExtArgs> | null
+    /**
+     * Filter, which AuditResults to fetch.
+     */
+    where?: AuditResultWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AuditResults to fetch.
+     */
+    orderBy?: AuditResultOrderByWithRelationInput | AuditResultOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AuditResults.
+     */
+    cursor?: AuditResultWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AuditResults from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AuditResults.
+     */
+    skip?: number
+    distinct?: AuditResultScalarFieldEnum | AuditResultScalarFieldEnum[]
+  }
+
+  /**
+   * AuditResult create
+   */
+  export type AuditResultCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AuditResult.
+     */
+    data: XOR<AuditResultCreateInput, AuditResultUncheckedCreateInput>
+  }
+
+  /**
+   * AuditResult createMany
+   */
+  export type AuditResultCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AuditResults.
+     */
+    data: AuditResultCreateManyInput | AuditResultCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AuditResult createManyAndReturn
+   */
+  export type AuditResultCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * The data used to create many AuditResults.
+     */
+    data: AuditResultCreateManyInput | AuditResultCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AuditResult update
+   */
+  export type AuditResultUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AuditResult.
+     */
+    data: XOR<AuditResultUpdateInput, AuditResultUncheckedUpdateInput>
+    /**
+     * Choose, which AuditResult to update.
+     */
+    where: AuditResultWhereUniqueInput
+  }
+
+  /**
+   * AuditResult updateMany
+   */
+  export type AuditResultUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AuditResults.
+     */
+    data: XOR<AuditResultUpdateManyMutationInput, AuditResultUncheckedUpdateManyInput>
+    /**
+     * Filter which AuditResults to update
+     */
+    where?: AuditResultWhereInput
+    /**
+     * Limit how many AuditResults to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AuditResult updateManyAndReturn
+   */
+  export type AuditResultUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * The data used to update AuditResults.
+     */
+    data: XOR<AuditResultUpdateManyMutationInput, AuditResultUncheckedUpdateManyInput>
+    /**
+     * Filter which AuditResults to update
+     */
+    where?: AuditResultWhereInput
+    /**
+     * Limit how many AuditResults to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AuditResult upsert
+   */
+  export type AuditResultUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AuditResult to update in case it exists.
+     */
+    where: AuditResultWhereUniqueInput
+    /**
+     * In case the AuditResult found by the `where` argument doesn't exist, create a new AuditResult with this data.
+     */
+    create: XOR<AuditResultCreateInput, AuditResultUncheckedCreateInput>
+    /**
+     * In case the AuditResult was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AuditResultUpdateInput, AuditResultUncheckedUpdateInput>
+  }
+
+  /**
+   * AuditResult delete
+   */
+  export type AuditResultDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultInclude<ExtArgs> | null
+    /**
+     * Filter which AuditResult to delete.
+     */
+    where: AuditResultWhereUniqueInput
+  }
+
+  /**
+   * AuditResult deleteMany
+   */
+  export type AuditResultDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AuditResults to delete
+     */
+    where?: AuditResultWhereInput
+    /**
+     * Limit how many AuditResults to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AuditResult without action
+   */
+  export type AuditResultDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditResult
+     */
+    select?: AuditResultSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditResult
+     */
+    omit?: AuditResultOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditResultInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5742,12 +8287,50 @@ export namespace Prisma {
   export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+  export const AuditProjectScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    name: 'name',
+    inputType: 'inputType',
+    snippet: 'snippet',
+    fileUrl: 'fileUrl',
+    fileName: 'fileName',
+    zipUrl: 'zipUrl',
+    zipFileName: 'zipFileName',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AuditProjectScalarFieldEnum = (typeof AuditProjectScalarFieldEnum)[keyof typeof AuditProjectScalarFieldEnum]
+
+
+  export const AuditResultScalarFieldEnum: {
+    id: 'id',
+    projectId: 'projectId',
+    fileName: 'fileName',
+    issues: 'issues',
+    dependencies: 'dependencies',
+    riskLevel: 'riskLevel',
+    createdAt: 'createdAt'
+  };
+
+  export type AuditResultScalarFieldEnum = (typeof AuditResultScalarFieldEnum)[keyof typeof AuditResultScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -5764,6 +8347,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -5835,6 +8427,62 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'InputType'
+   */
+  export type EnumInputTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InputType'>
+    
+
+
+  /**
+   * Reference to a field of type 'InputType[]'
+   */
+  export type ListEnumInputTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InputType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'AuditStatus'
+   */
+  export type EnumAuditStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuditStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'AuditStatus[]'
+   */
+  export type ListEnumAuditStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuditStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'RiskLevel'
+   */
+  export type EnumRiskLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RiskLevel'>
+    
+
+
+  /**
+   * Reference to a field of type 'RiskLevel[]'
+   */
+  export type ListEnumRiskLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RiskLevel[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -5869,6 +8517,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    auditProjects?: AuditProjectListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5886,6 +8535,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
+    auditProjects?: AuditProjectOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5906,6 +8556,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    auditProjects?: AuditProjectListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -6166,6 +8817,164 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Verification"> | Date | string
   }
 
+  export type AuditProjectWhereInput = {
+    AND?: AuditProjectWhereInput | AuditProjectWhereInput[]
+    OR?: AuditProjectWhereInput[]
+    NOT?: AuditProjectWhereInput | AuditProjectWhereInput[]
+    id?: StringFilter<"AuditProject"> | string
+    userId?: StringFilter<"AuditProject"> | string
+    name?: StringFilter<"AuditProject"> | string
+    inputType?: EnumInputTypeFilter<"AuditProject"> | $Enums.InputType
+    snippet?: StringNullableFilter<"AuditProject"> | string | null
+    fileUrl?: StringNullableFilter<"AuditProject"> | string | null
+    fileName?: StringNullableFilter<"AuditProject"> | string | null
+    zipUrl?: StringNullableFilter<"AuditProject"> | string | null
+    zipFileName?: StringNullableFilter<"AuditProject"> | string | null
+    status?: EnumAuditStatusFilter<"AuditProject"> | $Enums.AuditStatus
+    createdAt?: DateTimeFilter<"AuditProject"> | Date | string
+    updatedAt?: DateTimeFilter<"AuditProject"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    results?: AuditResultListRelationFilter
+  }
+
+  export type AuditProjectOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    inputType?: SortOrder
+    snippet?: SortOrderInput | SortOrder
+    fileUrl?: SortOrderInput | SortOrder
+    fileName?: SortOrderInput | SortOrder
+    zipUrl?: SortOrderInput | SortOrder
+    zipFileName?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    results?: AuditResultOrderByRelationAggregateInput
+  }
+
+  export type AuditProjectWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AuditProjectWhereInput | AuditProjectWhereInput[]
+    OR?: AuditProjectWhereInput[]
+    NOT?: AuditProjectWhereInput | AuditProjectWhereInput[]
+    userId?: StringFilter<"AuditProject"> | string
+    name?: StringFilter<"AuditProject"> | string
+    inputType?: EnumInputTypeFilter<"AuditProject"> | $Enums.InputType
+    snippet?: StringNullableFilter<"AuditProject"> | string | null
+    fileUrl?: StringNullableFilter<"AuditProject"> | string | null
+    fileName?: StringNullableFilter<"AuditProject"> | string | null
+    zipUrl?: StringNullableFilter<"AuditProject"> | string | null
+    zipFileName?: StringNullableFilter<"AuditProject"> | string | null
+    status?: EnumAuditStatusFilter<"AuditProject"> | $Enums.AuditStatus
+    createdAt?: DateTimeFilter<"AuditProject"> | Date | string
+    updatedAt?: DateTimeFilter<"AuditProject"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    results?: AuditResultListRelationFilter
+  }, "id">
+
+  export type AuditProjectOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    inputType?: SortOrder
+    snippet?: SortOrderInput | SortOrder
+    fileUrl?: SortOrderInput | SortOrder
+    fileName?: SortOrderInput | SortOrder
+    zipUrl?: SortOrderInput | SortOrder
+    zipFileName?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AuditProjectCountOrderByAggregateInput
+    _max?: AuditProjectMaxOrderByAggregateInput
+    _min?: AuditProjectMinOrderByAggregateInput
+  }
+
+  export type AuditProjectScalarWhereWithAggregatesInput = {
+    AND?: AuditProjectScalarWhereWithAggregatesInput | AuditProjectScalarWhereWithAggregatesInput[]
+    OR?: AuditProjectScalarWhereWithAggregatesInput[]
+    NOT?: AuditProjectScalarWhereWithAggregatesInput | AuditProjectScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AuditProject"> | string
+    userId?: StringWithAggregatesFilter<"AuditProject"> | string
+    name?: StringWithAggregatesFilter<"AuditProject"> | string
+    inputType?: EnumInputTypeWithAggregatesFilter<"AuditProject"> | $Enums.InputType
+    snippet?: StringNullableWithAggregatesFilter<"AuditProject"> | string | null
+    fileUrl?: StringNullableWithAggregatesFilter<"AuditProject"> | string | null
+    fileName?: StringNullableWithAggregatesFilter<"AuditProject"> | string | null
+    zipUrl?: StringNullableWithAggregatesFilter<"AuditProject"> | string | null
+    zipFileName?: StringNullableWithAggregatesFilter<"AuditProject"> | string | null
+    status?: EnumAuditStatusWithAggregatesFilter<"AuditProject"> | $Enums.AuditStatus
+    createdAt?: DateTimeWithAggregatesFilter<"AuditProject"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AuditProject"> | Date | string
+  }
+
+  export type AuditResultWhereInput = {
+    AND?: AuditResultWhereInput | AuditResultWhereInput[]
+    OR?: AuditResultWhereInput[]
+    NOT?: AuditResultWhereInput | AuditResultWhereInput[]
+    id?: StringFilter<"AuditResult"> | string
+    projectId?: StringFilter<"AuditResult"> | string
+    fileName?: StringFilter<"AuditResult"> | string
+    issues?: JsonFilter<"AuditResult">
+    dependencies?: JsonFilter<"AuditResult">
+    riskLevel?: EnumRiskLevelFilter<"AuditResult"> | $Enums.RiskLevel
+    createdAt?: DateTimeFilter<"AuditResult"> | Date | string
+    project?: XOR<AuditProjectScalarRelationFilter, AuditProjectWhereInput>
+  }
+
+  export type AuditResultOrderByWithRelationInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    fileName?: SortOrder
+    issues?: SortOrder
+    dependencies?: SortOrder
+    riskLevel?: SortOrder
+    createdAt?: SortOrder
+    project?: AuditProjectOrderByWithRelationInput
+  }
+
+  export type AuditResultWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AuditResultWhereInput | AuditResultWhereInput[]
+    OR?: AuditResultWhereInput[]
+    NOT?: AuditResultWhereInput | AuditResultWhereInput[]
+    projectId?: StringFilter<"AuditResult"> | string
+    fileName?: StringFilter<"AuditResult"> | string
+    issues?: JsonFilter<"AuditResult">
+    dependencies?: JsonFilter<"AuditResult">
+    riskLevel?: EnumRiskLevelFilter<"AuditResult"> | $Enums.RiskLevel
+    createdAt?: DateTimeFilter<"AuditResult"> | Date | string
+    project?: XOR<AuditProjectScalarRelationFilter, AuditProjectWhereInput>
+  }, "id">
+
+  export type AuditResultOrderByWithAggregationInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    fileName?: SortOrder
+    issues?: SortOrder
+    dependencies?: SortOrder
+    riskLevel?: SortOrder
+    createdAt?: SortOrder
+    _count?: AuditResultCountOrderByAggregateInput
+    _max?: AuditResultMaxOrderByAggregateInput
+    _min?: AuditResultMinOrderByAggregateInput
+  }
+
+  export type AuditResultScalarWhereWithAggregatesInput = {
+    AND?: AuditResultScalarWhereWithAggregatesInput | AuditResultScalarWhereWithAggregatesInput[]
+    OR?: AuditResultScalarWhereWithAggregatesInput[]
+    NOT?: AuditResultScalarWhereWithAggregatesInput | AuditResultScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AuditResult"> | string
+    projectId?: StringWithAggregatesFilter<"AuditResult"> | string
+    fileName?: StringWithAggregatesFilter<"AuditResult"> | string
+    issues?: JsonWithAggregatesFilter<"AuditResult">
+    dependencies?: JsonWithAggregatesFilter<"AuditResult">
+    riskLevel?: EnumRiskLevelWithAggregatesFilter<"AuditResult"> | $Enums.RiskLevel
+    createdAt?: DateTimeWithAggregatesFilter<"AuditResult"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name: string
@@ -6181,6 +8990,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    auditProjects?: AuditProjectCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6198,6 +9008,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    auditProjects?: AuditProjectUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6215,6 +9026,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    auditProjects?: AuditProjectUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6232,6 +9044,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    auditProjects?: AuditProjectUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6529,6 +9342,183 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AuditProjectCreateInput = {
+    id?: string
+    name: string
+    inputType: $Enums.InputType
+    snippet?: string | null
+    fileUrl?: string | null
+    fileName?: string | null
+    zipUrl?: string | null
+    zipFileName?: string | null
+    status?: $Enums.AuditStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAuditProjectsInput
+    results?: AuditResultCreateNestedManyWithoutProjectInput
+  }
+
+  export type AuditProjectUncheckedCreateInput = {
+    id?: string
+    userId: string
+    name: string
+    inputType: $Enums.InputType
+    snippet?: string | null
+    fileUrl?: string | null
+    fileName?: string | null
+    zipUrl?: string | null
+    zipFileName?: string | null
+    status?: $Enums.AuditStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    results?: AuditResultUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type AuditProjectUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    inputType?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
+    snippet?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    zipUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    zipFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAuditStatusFieldUpdateOperationsInput | $Enums.AuditStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAuditProjectsNestedInput
+    results?: AuditResultUpdateManyWithoutProjectNestedInput
+  }
+
+  export type AuditProjectUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    inputType?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
+    snippet?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    zipUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    zipFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAuditStatusFieldUpdateOperationsInput | $Enums.AuditStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    results?: AuditResultUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type AuditProjectCreateManyInput = {
+    id?: string
+    userId: string
+    name: string
+    inputType: $Enums.InputType
+    snippet?: string | null
+    fileUrl?: string | null
+    fileName?: string | null
+    zipUrl?: string | null
+    zipFileName?: string | null
+    status?: $Enums.AuditStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AuditProjectUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    inputType?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
+    snippet?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    zipUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    zipFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAuditStatusFieldUpdateOperationsInput | $Enums.AuditStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditProjectUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    inputType?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
+    snippet?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    zipUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    zipFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAuditStatusFieldUpdateOperationsInput | $Enums.AuditStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditResultCreateInput = {
+    id?: string
+    fileName: string
+    issues: JsonNullValueInput | InputJsonValue
+    dependencies: JsonNullValueInput | InputJsonValue
+    riskLevel?: $Enums.RiskLevel
+    createdAt?: Date | string
+    project: AuditProjectCreateNestedOneWithoutResultsInput
+  }
+
+  export type AuditResultUncheckedCreateInput = {
+    id?: string
+    projectId: string
+    fileName: string
+    issues: JsonNullValueInput | InputJsonValue
+    dependencies: JsonNullValueInput | InputJsonValue
+    riskLevel?: $Enums.RiskLevel
+    createdAt?: Date | string
+  }
+
+  export type AuditResultUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    issues?: JsonNullValueInput | InputJsonValue
+    dependencies?: JsonNullValueInput | InputJsonValue
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: AuditProjectUpdateOneRequiredWithoutResultsNestedInput
+  }
+
+  export type AuditResultUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    issues?: JsonNullValueInput | InputJsonValue
+    dependencies?: JsonNullValueInput | InputJsonValue
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditResultCreateManyInput = {
+    id?: string
+    projectId: string
+    fileName: string
+    issues: JsonNullValueInput | InputJsonValue
+    dependencies: JsonNullValueInput | InputJsonValue
+    riskLevel?: $Enums.RiskLevel
+    createdAt?: Date | string
+  }
+
+  export type AuditResultUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    issues?: JsonNullValueInput | InputJsonValue
+    dependencies?: JsonNullValueInput | InputJsonValue
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditResultUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    issues?: JsonNullValueInput | InputJsonValue
+    dependencies?: JsonNullValueInput | InputJsonValue
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6612,6 +9602,12 @@ export namespace Prisma {
     none?: AccountWhereInput
   }
 
+  export type AuditProjectListRelationFilter = {
+    every?: AuditProjectWhereInput
+    some?: AuditProjectWhereInput
+    none?: AuditProjectWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -6622,6 +9618,10 @@ export namespace Prisma {
   }
 
   export type AccountOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AuditProjectOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6875,6 +9875,192 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumInputTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.InputType | EnumInputTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInputTypeFilter<$PrismaModel> | $Enums.InputType
+  }
+
+  export type EnumAuditStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuditStatus | EnumAuditStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AuditStatus[] | ListEnumAuditStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuditStatus[] | ListEnumAuditStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuditStatusFilter<$PrismaModel> | $Enums.AuditStatus
+  }
+
+  export type AuditResultListRelationFilter = {
+    every?: AuditResultWhereInput
+    some?: AuditResultWhereInput
+    none?: AuditResultWhereInput
+  }
+
+  export type AuditResultOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AuditProjectCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    inputType?: SortOrder
+    snippet?: SortOrder
+    fileUrl?: SortOrder
+    fileName?: SortOrder
+    zipUrl?: SortOrder
+    zipFileName?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AuditProjectMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    inputType?: SortOrder
+    snippet?: SortOrder
+    fileUrl?: SortOrder
+    fileName?: SortOrder
+    zipUrl?: SortOrder
+    zipFileName?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AuditProjectMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    name?: SortOrder
+    inputType?: SortOrder
+    snippet?: SortOrder
+    fileUrl?: SortOrder
+    fileName?: SortOrder
+    zipUrl?: SortOrder
+    zipFileName?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumInputTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InputType | EnumInputTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInputTypeWithAggregatesFilter<$PrismaModel> | $Enums.InputType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInputTypeFilter<$PrismaModel>
+    _max?: NestedEnumInputTypeFilter<$PrismaModel>
+  }
+
+  export type EnumAuditStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuditStatus | EnumAuditStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AuditStatus[] | ListEnumAuditStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuditStatus[] | ListEnumAuditStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuditStatusWithAggregatesFilter<$PrismaModel> | $Enums.AuditStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAuditStatusFilter<$PrismaModel>
+    _max?: NestedEnumAuditStatusFilter<$PrismaModel>
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type EnumRiskLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelFilter<$PrismaModel> | $Enums.RiskLevel
+  }
+
+  export type AuditProjectScalarRelationFilter = {
+    is?: AuditProjectWhereInput
+    isNot?: AuditProjectWhereInput
+  }
+
+  export type AuditResultCountOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    fileName?: SortOrder
+    issues?: SortOrder
+    dependencies?: SortOrder
+    riskLevel?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AuditResultMaxOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    fileName?: SortOrder
+    riskLevel?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AuditResultMinOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    fileName?: SortOrder
+    riskLevel?: SortOrder
+    createdAt?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type EnumRiskLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelWithAggregatesFilter<$PrismaModel> | $Enums.RiskLevel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRiskLevelFilter<$PrismaModel>
+    _max?: NestedEnumRiskLevelFilter<$PrismaModel>
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -6889,6 +10075,13 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
+  export type AuditProjectCreateNestedManyWithoutUserInput = {
+    create?: XOR<AuditProjectCreateWithoutUserInput, AuditProjectUncheckedCreateWithoutUserInput> | AuditProjectCreateWithoutUserInput[] | AuditProjectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuditProjectCreateOrConnectWithoutUserInput | AuditProjectCreateOrConnectWithoutUserInput[]
+    createMany?: AuditProjectCreateManyUserInputEnvelope
+    connect?: AuditProjectWhereUniqueInput | AuditProjectWhereUniqueInput[]
+  }
+
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -6901,6 +10094,13 @@ export namespace Prisma {
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
+  export type AuditProjectUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AuditProjectCreateWithoutUserInput, AuditProjectUncheckedCreateWithoutUserInput> | AuditProjectCreateWithoutUserInput[] | AuditProjectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuditProjectCreateOrConnectWithoutUserInput | AuditProjectCreateOrConnectWithoutUserInput[]
+    createMany?: AuditProjectCreateManyUserInputEnvelope
+    connect?: AuditProjectWhereUniqueInput | AuditProjectWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6959,6 +10159,20 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
+  export type AuditProjectUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AuditProjectCreateWithoutUserInput, AuditProjectUncheckedCreateWithoutUserInput> | AuditProjectCreateWithoutUserInput[] | AuditProjectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuditProjectCreateOrConnectWithoutUserInput | AuditProjectCreateOrConnectWithoutUserInput[]
+    upsert?: AuditProjectUpsertWithWhereUniqueWithoutUserInput | AuditProjectUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AuditProjectCreateManyUserInputEnvelope
+    set?: AuditProjectWhereUniqueInput | AuditProjectWhereUniqueInput[]
+    disconnect?: AuditProjectWhereUniqueInput | AuditProjectWhereUniqueInput[]
+    delete?: AuditProjectWhereUniqueInput | AuditProjectWhereUniqueInput[]
+    connect?: AuditProjectWhereUniqueInput | AuditProjectWhereUniqueInput[]
+    update?: AuditProjectUpdateWithWhereUniqueWithoutUserInput | AuditProjectUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AuditProjectUpdateManyWithWhereWithoutUserInput | AuditProjectUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AuditProjectScalarWhereInput | AuditProjectScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -6987,6 +10201,20 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
+  export type AuditProjectUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AuditProjectCreateWithoutUserInput, AuditProjectUncheckedCreateWithoutUserInput> | AuditProjectCreateWithoutUserInput[] | AuditProjectUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuditProjectCreateOrConnectWithoutUserInput | AuditProjectCreateOrConnectWithoutUserInput[]
+    upsert?: AuditProjectUpsertWithWhereUniqueWithoutUserInput | AuditProjectUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AuditProjectCreateManyUserInputEnvelope
+    set?: AuditProjectWhereUniqueInput | AuditProjectWhereUniqueInput[]
+    disconnect?: AuditProjectWhereUniqueInput | AuditProjectWhereUniqueInput[]
+    delete?: AuditProjectWhereUniqueInput | AuditProjectWhereUniqueInput[]
+    connect?: AuditProjectWhereUniqueInput | AuditProjectWhereUniqueInput[]
+    update?: AuditProjectUpdateWithWhereUniqueWithoutUserInput | AuditProjectUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AuditProjectUpdateManyWithWhereWithoutUserInput | AuditProjectUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AuditProjectScalarWhereInput | AuditProjectScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutSessionsInput = {
     create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
@@ -7013,6 +10241,88 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutAccountsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
+  }
+
+  export type UserCreateNestedOneWithoutAuditProjectsInput = {
+    create?: XOR<UserCreateWithoutAuditProjectsInput, UserUncheckedCreateWithoutAuditProjectsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAuditProjectsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type AuditResultCreateNestedManyWithoutProjectInput = {
+    create?: XOR<AuditResultCreateWithoutProjectInput, AuditResultUncheckedCreateWithoutProjectInput> | AuditResultCreateWithoutProjectInput[] | AuditResultUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: AuditResultCreateOrConnectWithoutProjectInput | AuditResultCreateOrConnectWithoutProjectInput[]
+    createMany?: AuditResultCreateManyProjectInputEnvelope
+    connect?: AuditResultWhereUniqueInput | AuditResultWhereUniqueInput[]
+  }
+
+  export type AuditResultUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<AuditResultCreateWithoutProjectInput, AuditResultUncheckedCreateWithoutProjectInput> | AuditResultCreateWithoutProjectInput[] | AuditResultUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: AuditResultCreateOrConnectWithoutProjectInput | AuditResultCreateOrConnectWithoutProjectInput[]
+    createMany?: AuditResultCreateManyProjectInputEnvelope
+    connect?: AuditResultWhereUniqueInput | AuditResultWhereUniqueInput[]
+  }
+
+  export type EnumInputTypeFieldUpdateOperationsInput = {
+    set?: $Enums.InputType
+  }
+
+  export type EnumAuditStatusFieldUpdateOperationsInput = {
+    set?: $Enums.AuditStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutAuditProjectsNestedInput = {
+    create?: XOR<UserCreateWithoutAuditProjectsInput, UserUncheckedCreateWithoutAuditProjectsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAuditProjectsInput
+    upsert?: UserUpsertWithoutAuditProjectsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAuditProjectsInput, UserUpdateWithoutAuditProjectsInput>, UserUncheckedUpdateWithoutAuditProjectsInput>
+  }
+
+  export type AuditResultUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<AuditResultCreateWithoutProjectInput, AuditResultUncheckedCreateWithoutProjectInput> | AuditResultCreateWithoutProjectInput[] | AuditResultUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: AuditResultCreateOrConnectWithoutProjectInput | AuditResultCreateOrConnectWithoutProjectInput[]
+    upsert?: AuditResultUpsertWithWhereUniqueWithoutProjectInput | AuditResultUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: AuditResultCreateManyProjectInputEnvelope
+    set?: AuditResultWhereUniqueInput | AuditResultWhereUniqueInput[]
+    disconnect?: AuditResultWhereUniqueInput | AuditResultWhereUniqueInput[]
+    delete?: AuditResultWhereUniqueInput | AuditResultWhereUniqueInput[]
+    connect?: AuditResultWhereUniqueInput | AuditResultWhereUniqueInput[]
+    update?: AuditResultUpdateWithWhereUniqueWithoutProjectInput | AuditResultUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: AuditResultUpdateManyWithWhereWithoutProjectInput | AuditResultUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: AuditResultScalarWhereInput | AuditResultScalarWhereInput[]
+  }
+
+  export type AuditResultUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<AuditResultCreateWithoutProjectInput, AuditResultUncheckedCreateWithoutProjectInput> | AuditResultCreateWithoutProjectInput[] | AuditResultUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: AuditResultCreateOrConnectWithoutProjectInput | AuditResultCreateOrConnectWithoutProjectInput[]
+    upsert?: AuditResultUpsertWithWhereUniqueWithoutProjectInput | AuditResultUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: AuditResultCreateManyProjectInputEnvelope
+    set?: AuditResultWhereUniqueInput | AuditResultWhereUniqueInput[]
+    disconnect?: AuditResultWhereUniqueInput | AuditResultWhereUniqueInput[]
+    delete?: AuditResultWhereUniqueInput | AuditResultWhereUniqueInput[]
+    connect?: AuditResultWhereUniqueInput | AuditResultWhereUniqueInput[]
+    update?: AuditResultUpdateWithWhereUniqueWithoutProjectInput | AuditResultUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: AuditResultUpdateManyWithWhereWithoutProjectInput | AuditResultUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: AuditResultScalarWhereInput | AuditResultScalarWhereInput[]
+  }
+
+  export type AuditProjectCreateNestedOneWithoutResultsInput = {
+    create?: XOR<AuditProjectCreateWithoutResultsInput, AuditProjectUncheckedCreateWithoutResultsInput>
+    connectOrCreate?: AuditProjectCreateOrConnectWithoutResultsInput
+    connect?: AuditProjectWhereUniqueInput
+  }
+
+  export type EnumRiskLevelFieldUpdateOperationsInput = {
+    set?: $Enums.RiskLevel
+  }
+
+  export type AuditProjectUpdateOneRequiredWithoutResultsNestedInput = {
+    create?: XOR<AuditProjectCreateWithoutResultsInput, AuditProjectUncheckedCreateWithoutResultsInput>
+    connectOrCreate?: AuditProjectCreateOrConnectWithoutResultsInput
+    upsert?: AuditProjectUpsertWithoutResultsInput
+    connect?: AuditProjectWhereUniqueInput
+    update?: XOR<XOR<AuditProjectUpdateToOneWithWhereWithoutResultsInput, AuditProjectUpdateWithoutResultsInput>, AuditProjectUncheckedUpdateWithoutResultsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -7196,6 +10506,80 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumInputTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.InputType | EnumInputTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInputTypeFilter<$PrismaModel> | $Enums.InputType
+  }
+
+  export type NestedEnumAuditStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuditStatus | EnumAuditStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AuditStatus[] | ListEnumAuditStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuditStatus[] | ListEnumAuditStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuditStatusFilter<$PrismaModel> | $Enums.AuditStatus
+  }
+
+  export type NestedEnumInputTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InputType | EnumInputTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInputTypeWithAggregatesFilter<$PrismaModel> | $Enums.InputType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInputTypeFilter<$PrismaModel>
+    _max?: NestedEnumInputTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumAuditStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuditStatus | EnumAuditStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AuditStatus[] | ListEnumAuditStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuditStatus[] | ListEnumAuditStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuditStatusWithAggregatesFilter<$PrismaModel> | $Enums.AuditStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAuditStatusFilter<$PrismaModel>
+    _max?: NestedEnumAuditStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumRiskLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelFilter<$PrismaModel> | $Enums.RiskLevel
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedEnumRiskLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RiskLevel | EnumRiskLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RiskLevel[] | ListEnumRiskLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumRiskLevelWithAggregatesFilter<$PrismaModel> | $Enums.RiskLevel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRiskLevelFilter<$PrismaModel>
+    _max?: NestedEnumRiskLevelFilter<$PrismaModel>
+  }
+
   export type SessionCreateWithoutUserInput = {
     id?: string
     expiresAt: Date | string
@@ -7266,6 +10650,46 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AuditProjectCreateWithoutUserInput = {
+    id?: string
+    name: string
+    inputType: $Enums.InputType
+    snippet?: string | null
+    fileUrl?: string | null
+    fileName?: string | null
+    zipUrl?: string | null
+    zipFileName?: string | null
+    status?: $Enums.AuditStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    results?: AuditResultCreateNestedManyWithoutProjectInput
+  }
+
+  export type AuditProjectUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    inputType: $Enums.InputType
+    snippet?: string | null
+    fileUrl?: string | null
+    fileName?: string | null
+    zipUrl?: string | null
+    zipFileName?: string | null
+    status?: $Enums.AuditStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    results?: AuditResultUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type AuditProjectCreateOrConnectWithoutUserInput = {
+    where: AuditProjectWhereUniqueInput
+    create: XOR<AuditProjectCreateWithoutUserInput, AuditProjectUncheckedCreateWithoutUserInput>
+  }
+
+  export type AuditProjectCreateManyUserInputEnvelope = {
+    data: AuditProjectCreateManyUserInput | AuditProjectCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
@@ -7331,6 +10755,40 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
+  export type AuditProjectUpsertWithWhereUniqueWithoutUserInput = {
+    where: AuditProjectWhereUniqueInput
+    update: XOR<AuditProjectUpdateWithoutUserInput, AuditProjectUncheckedUpdateWithoutUserInput>
+    create: XOR<AuditProjectCreateWithoutUserInput, AuditProjectUncheckedCreateWithoutUserInput>
+  }
+
+  export type AuditProjectUpdateWithWhereUniqueWithoutUserInput = {
+    where: AuditProjectWhereUniqueInput
+    data: XOR<AuditProjectUpdateWithoutUserInput, AuditProjectUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AuditProjectUpdateManyWithWhereWithoutUserInput = {
+    where: AuditProjectScalarWhereInput
+    data: XOR<AuditProjectUpdateManyMutationInput, AuditProjectUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AuditProjectScalarWhereInput = {
+    AND?: AuditProjectScalarWhereInput | AuditProjectScalarWhereInput[]
+    OR?: AuditProjectScalarWhereInput[]
+    NOT?: AuditProjectScalarWhereInput | AuditProjectScalarWhereInput[]
+    id?: StringFilter<"AuditProject"> | string
+    userId?: StringFilter<"AuditProject"> | string
+    name?: StringFilter<"AuditProject"> | string
+    inputType?: EnumInputTypeFilter<"AuditProject"> | $Enums.InputType
+    snippet?: StringNullableFilter<"AuditProject"> | string | null
+    fileUrl?: StringNullableFilter<"AuditProject"> | string | null
+    fileName?: StringNullableFilter<"AuditProject"> | string | null
+    zipUrl?: StringNullableFilter<"AuditProject"> | string | null
+    zipFileName?: StringNullableFilter<"AuditProject"> | string | null
+    status?: EnumAuditStatusFilter<"AuditProject"> | $Enums.AuditStatus
+    createdAt?: DateTimeFilter<"AuditProject"> | Date | string
+    updatedAt?: DateTimeFilter<"AuditProject"> | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     name: string
@@ -7345,6 +10803,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
+    auditProjects?: AuditProjectCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -7361,6 +10820,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    auditProjects?: AuditProjectUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -7393,6 +10853,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    auditProjects?: AuditProjectUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -7409,6 +10870,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    auditProjects?: AuditProjectUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -7425,6 +10887,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
+    auditProjects?: AuditProjectCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -7441,6 +10904,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    auditProjects?: AuditProjectUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -7473,6 +10937,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    auditProjects?: AuditProjectUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -7489,6 +10954,224 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    auditProjects?: AuditProjectUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutAuditProjectsInput = {
+    id?: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    role?: $Enums.Role
+    status?: $Enums.UserStatus
+    needPasswordChange?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAuditProjectsInput = {
+    id?: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    role?: $Enums.Role
+    status?: $Enums.UserStatus
+    needPasswordChange?: boolean
+    isDeleted?: boolean
+    deletedAt?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAuditProjectsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAuditProjectsInput, UserUncheckedCreateWithoutAuditProjectsInput>
+  }
+
+  export type AuditResultCreateWithoutProjectInput = {
+    id?: string
+    fileName: string
+    issues: JsonNullValueInput | InputJsonValue
+    dependencies: JsonNullValueInput | InputJsonValue
+    riskLevel?: $Enums.RiskLevel
+    createdAt?: Date | string
+  }
+
+  export type AuditResultUncheckedCreateWithoutProjectInput = {
+    id?: string
+    fileName: string
+    issues: JsonNullValueInput | InputJsonValue
+    dependencies: JsonNullValueInput | InputJsonValue
+    riskLevel?: $Enums.RiskLevel
+    createdAt?: Date | string
+  }
+
+  export type AuditResultCreateOrConnectWithoutProjectInput = {
+    where: AuditResultWhereUniqueInput
+    create: XOR<AuditResultCreateWithoutProjectInput, AuditResultUncheckedCreateWithoutProjectInput>
+  }
+
+  export type AuditResultCreateManyProjectInputEnvelope = {
+    data: AuditResultCreateManyProjectInput | AuditResultCreateManyProjectInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutAuditProjectsInput = {
+    update: XOR<UserUpdateWithoutAuditProjectsInput, UserUncheckedUpdateWithoutAuditProjectsInput>
+    create: XOR<UserCreateWithoutAuditProjectsInput, UserUncheckedCreateWithoutAuditProjectsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAuditProjectsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAuditProjectsInput, UserUncheckedUpdateWithoutAuditProjectsInput>
+  }
+
+  export type UserUpdateWithoutAuditProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    needPasswordChange?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAuditProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    needPasswordChange?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AuditResultUpsertWithWhereUniqueWithoutProjectInput = {
+    where: AuditResultWhereUniqueInput
+    update: XOR<AuditResultUpdateWithoutProjectInput, AuditResultUncheckedUpdateWithoutProjectInput>
+    create: XOR<AuditResultCreateWithoutProjectInput, AuditResultUncheckedCreateWithoutProjectInput>
+  }
+
+  export type AuditResultUpdateWithWhereUniqueWithoutProjectInput = {
+    where: AuditResultWhereUniqueInput
+    data: XOR<AuditResultUpdateWithoutProjectInput, AuditResultUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type AuditResultUpdateManyWithWhereWithoutProjectInput = {
+    where: AuditResultScalarWhereInput
+    data: XOR<AuditResultUpdateManyMutationInput, AuditResultUncheckedUpdateManyWithoutProjectInput>
+  }
+
+  export type AuditResultScalarWhereInput = {
+    AND?: AuditResultScalarWhereInput | AuditResultScalarWhereInput[]
+    OR?: AuditResultScalarWhereInput[]
+    NOT?: AuditResultScalarWhereInput | AuditResultScalarWhereInput[]
+    id?: StringFilter<"AuditResult"> | string
+    projectId?: StringFilter<"AuditResult"> | string
+    fileName?: StringFilter<"AuditResult"> | string
+    issues?: JsonFilter<"AuditResult">
+    dependencies?: JsonFilter<"AuditResult">
+    riskLevel?: EnumRiskLevelFilter<"AuditResult"> | $Enums.RiskLevel
+    createdAt?: DateTimeFilter<"AuditResult"> | Date | string
+  }
+
+  export type AuditProjectCreateWithoutResultsInput = {
+    id?: string
+    name: string
+    inputType: $Enums.InputType
+    snippet?: string | null
+    fileUrl?: string | null
+    fileName?: string | null
+    zipUrl?: string | null
+    zipFileName?: string | null
+    status?: $Enums.AuditStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAuditProjectsInput
+  }
+
+  export type AuditProjectUncheckedCreateWithoutResultsInput = {
+    id?: string
+    userId: string
+    name: string
+    inputType: $Enums.InputType
+    snippet?: string | null
+    fileUrl?: string | null
+    fileName?: string | null
+    zipUrl?: string | null
+    zipFileName?: string | null
+    status?: $Enums.AuditStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AuditProjectCreateOrConnectWithoutResultsInput = {
+    where: AuditProjectWhereUniqueInput
+    create: XOR<AuditProjectCreateWithoutResultsInput, AuditProjectUncheckedCreateWithoutResultsInput>
+  }
+
+  export type AuditProjectUpsertWithoutResultsInput = {
+    update: XOR<AuditProjectUpdateWithoutResultsInput, AuditProjectUncheckedUpdateWithoutResultsInput>
+    create: XOR<AuditProjectCreateWithoutResultsInput, AuditProjectUncheckedCreateWithoutResultsInput>
+    where?: AuditProjectWhereInput
+  }
+
+  export type AuditProjectUpdateToOneWithWhereWithoutResultsInput = {
+    where?: AuditProjectWhereInput
+    data: XOR<AuditProjectUpdateWithoutResultsInput, AuditProjectUncheckedUpdateWithoutResultsInput>
+  }
+
+  export type AuditProjectUpdateWithoutResultsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    inputType?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
+    snippet?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    zipUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    zipFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAuditStatusFieldUpdateOperationsInput | $Enums.AuditStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAuditProjectsNestedInput
+  }
+
+  export type AuditProjectUncheckedUpdateWithoutResultsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    inputType?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
+    snippet?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    zipUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    zipFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAuditStatusFieldUpdateOperationsInput | $Enums.AuditStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionCreateManyUserInput = {
@@ -7512,6 +11195,20 @@ export namespace Prisma {
     refreshTokenExpiresAt?: Date | string | null
     scope?: string | null
     password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AuditProjectCreateManyUserInput = {
+    id?: string
+    name: string
+    inputType: $Enums.InputType
+    snippet?: string | null
+    fileUrl?: string | null
+    fileName?: string | null
+    zipUrl?: string | null
+    zipFileName?: string | null
+    status?: $Enums.AuditStatus
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7589,6 +11286,86 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditProjectUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    inputType?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
+    snippet?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    zipUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    zipFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAuditStatusFieldUpdateOperationsInput | $Enums.AuditStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    results?: AuditResultUpdateManyWithoutProjectNestedInput
+  }
+
+  export type AuditProjectUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    inputType?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
+    snippet?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    zipUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    zipFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAuditStatusFieldUpdateOperationsInput | $Enums.AuditStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    results?: AuditResultUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type AuditProjectUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    inputType?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
+    snippet?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    zipUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    zipFileName?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAuditStatusFieldUpdateOperationsInput | $Enums.AuditStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditResultCreateManyProjectInput = {
+    id?: string
+    fileName: string
+    issues: JsonNullValueInput | InputJsonValue
+    dependencies: JsonNullValueInput | InputJsonValue
+    riskLevel?: $Enums.RiskLevel
+    createdAt?: Date | string
+  }
+
+  export type AuditResultUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    issues?: JsonNullValueInput | InputJsonValue
+    dependencies?: JsonNullValueInput | InputJsonValue
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditResultUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    issues?: JsonNullValueInput | InputJsonValue
+    dependencies?: JsonNullValueInput | InputJsonValue
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditResultUncheckedUpdateManyWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    issues?: JsonNullValueInput | InputJsonValue
+    dependencies?: JsonNullValueInput | InputJsonValue
+    riskLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
