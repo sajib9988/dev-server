@@ -149,16 +149,8 @@ model AuditResult {
   id           String       @id @default(cuid())
   projectId    String
   project      AuditProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
-  // কোন ফাইল analyze হয়েছে
-  // snippet হলে → "snippet"
-  // single file হলে → original file নাম
-  // ZIP হলে → ZIP-এর ভেতরের প্রতিটা file-এর জন্য আলাদা row
   fileName     String
-
-  // AI-এর দেওয়া issues
-  // structure: [{ type, severity, line, message, suggestion }]
-  issues       Json
+   issues       Json
 
   // React Flow-এর জন্য dependency map
   // structure: { nodes: [{ id, label }], edges: [{ source, target }] }
