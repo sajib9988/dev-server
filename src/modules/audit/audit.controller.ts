@@ -51,7 +51,7 @@ export const getUserAudit = catchAsync(async (req: Request, res: Response) => {
       sendResponse(res, {
         status: 201,
         success: true,
-        message: "File audit created successfully",
+        message: "User audit get successfully",
         data: result,
     });
 });
