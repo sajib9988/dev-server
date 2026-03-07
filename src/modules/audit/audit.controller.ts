@@ -1,64 +1,66 @@
-import { uploadToCloudinary } from "../../config/cloudinary";
-import { prisma } from "../../database/prisma";
-import { InputType } from "../../generated/prisma";
-import { TcreateFileAudit, TCreateSnippet } from "./audit.interface";
-import { analyzeCode } from "./utils/aiAnalyzer";
-import { isZipBuffer } from "./utils/bufferCheck";
-import { extractZipAndRead } from "./utils/zipHandler";
+import { Request, Response } from "express";
+import { catchAsync } from "../../shared/utils/catch-async";
+import { TCreateSnippet, TcreateFileAudit } from "./audit.interface";
+import { sendResponse } from "../../shared/utils/send-response";
+import { auditService } from "./audit.service";
 
 
-export const createSnippetAudit = async (userId: string, payload: TCreateSnippet) => {
-             const result = await prisma.auditProject.create({
-                 data: {
-                     userId,
-                     name: payload.name || "Snippet Audit",
-                     inputType: InputType.SNIPPET,
-                     snippet: payload.snippet,
-                 }
-             });
-             return result;
-}
 
-export const createFileAudit = async (userId: string, payload: TcreateFileAudit) => {
-    let type: InputType = InputType.SINGLE_FILE;
-    let files: { filename: string; content: string }[] = [];
 
-    // ZIP detect
-    if (isZipBuffer(payload.fileBuffer)) {
-        type = InputType.ZIP;
-        files = extractZipAndRead(payload.fileBuffer);
-    } else {
-        files = [{ filename: payload.fileName, content: payload.fileBuffer.toString("utf-8") }];
+export const createSnippetAudit = catchAsync(async (req: Request, res: Response) => {
+    const userId=req.user.id;
+     const payload = req.body as TCreateSnippet;
+     const result = await auditService.createSnippetAudit(userId, payload);
+     sendResponse(res, {
+        status: 201,
+        success: true,
+        message: "Snippet audit created successfully",
+        data: result,
+     });
+});
+
+export const createFileAudit = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user.id;
+    const file = req.file;
+
+    if (!file) {
+        return sendResponse(res, {
+            status: 400,
+            success: false,
+            message: "No file uploaded",
+        });
     }
 
-    const cloudUrl = await uploadToCloudinary(payload.fileBuffer, payload.fileName);
-
-    const auditResults: { fileName: string, issue: any }[] = [];
-
-    for (const file of files) {
-        const issue = await analyzeCode(file.content);
-        auditResults.push({ fileName: file.filename, issue });
-    }
-
-    const audit = await prisma.auditProject.create({
-        data: {
-            userId,
-            name: payload.name || payload.fileName || "File Audit",
-            inputType: type,
-            fileUrl: type === InputType.SINGLE_FILE ? cloudUrl : undefined,
-            zipUrl: type === InputType.ZIP ? cloudUrl : undefined,
-            fileName: type === InputType.SINGLE_FILE ? payload.fileName : undefined,
-            zipFileName: type === InputType.ZIP ? payload.fileName : undefined,
-        },
+    const result = await auditService.createFileAudit(userId, {
+      fileBuffer: file.buffer,
+      fileName: file.originalname,
+      name: req.body.name,
     });
-
-    return { audit, results: auditResults };
-}
-
-export const getUserAudit = async (userId: string) => {
-    const audits = await prisma.auditProject.findMany({
-        where: { userId },
-        orderBy: { createdAt: "desc" },
+    
+    sendResponse(res, {
+        status: 201,
+        success: true,
+        message: "File audit created successfully",
+        data: result,
     });
-    return audits;
-}
+});
+
+export const getUserAudit = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user.id;
+    const result = await auditService.getUserAudit(userId);
+      sendResponse(res, {
+        status: 201,
+        success: true,
+        message: "File audit created successfully",
+        data: result,
+    });
+});
+
+
+const AuditController = {
+    createSnippetAudit,
+    createFileAudit,
+    getUserAudit
+};
+
+export default AuditController;
