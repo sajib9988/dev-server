@@ -8,15 +8,23 @@ import { extractZipAndRead } from "./utils/zipHandler";
 
 
 export const createSnippetAudit = async (userId: string, payload: TCreateSnippet) => {
-             const result = await prisma.auditProject.create({
-                 data: {
-                     userId,
-                     name: payload.name || "Snippet Audit",
-                     inputType: InputType.SNIPPET,
-                     snippet: payload.snippet,
-                 }
-             });
-             return result;
+    // AI analysis করো
+    const issues = await analyzeCode(payload.snippet);
+
+    const result = await prisma.auditProject.create({
+        data: {
+            userId,
+            name: payload.name || "Snippet Audit",
+            inputType: InputType.SNIPPET,
+            snippet: payload.snippet,
+        }
+    });
+
+    // analysis result সহ return করো
+    return {
+        audit: result,
+        issues,
+    };
 }
 
 export const createFileAudit = async (userId: string, payload: TcreateFileAudit) => {

@@ -9,7 +9,7 @@ const genAI = new GoogleGenerativeAI(envVars.GEMINI_API_KEY);
  * @returns JSON array of issues
  */
 export const analyzeCode = async (code: string) => {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+ const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
   const prompt = `
 Analyze this code and return security issues in JSON format.
